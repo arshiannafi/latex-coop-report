@@ -1,0 +1,23 @@
+# Ignore all
+*
+
+# Except:
+
+# Git ignore
+!.gitignore
+
+# Folders
+!prematter*
+!body*
+!appendices*
+
+# tex files
+!*.tex
+
+# imgaes
+!img*
+!*.jpg
+!*.png
+
+# Readme
+!README.md

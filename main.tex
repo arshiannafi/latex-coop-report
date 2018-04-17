@@ -1,0 +1,170 @@
+\documentclass[12pt]{article}
+
+% Variables and commands
+\newcommand{\version}{Ver. draft-201707221108}
+\newcommand{\br}{\vspace*{14pt}} % adds space
+\newcommand{\code}[1]{\lstinline[style=java]{#1}} % adds space
+% \linespread{1.75}
+
+% ============================== LATEX Libraries ==============================
+
+\usepackage[margin=1in]{geometry} % page margin is set to 1 inch
+
+% Font setup
+\usepackage{mathptmx} % Times Roman font
+\usepackage{helvet} % Helvetica (Arial)
+\usepackage{titlesec}
+\titleformat*{\section}{\fontsize{16}{18}\bfseries\sffamily}
+\titleformat*{\subsection}{\fontsize{14}{16}\bfseries\sffamily}
+\titleformat*{\subsubsection}{\fontsize{12}{14}\bfseries\sffamily}
+\renewcommand{\contentsname}{\sffamily{Table of Contents}} %toc
+\renewcommand{\listfigurename}{\sffamily{List of Figures}} %figs
+\renewcommand{\listtablename}{\sffamily{List of Tables}} %talbe
+% End of font setup
+
+% Enum package
+\usepackage{enumitem}
+\setlist{nosep} % no spaces between list items and around the list
+
+% \setlist{noitemsep}
+% no spaces between list items
+% but has spaces around whole list
+
+% end of enum package
+
+\usepackage{graphicx} % Images
+\usepackage{float} % Images placement
+\usepackage[titletoc, title]{appendix} % appendix
+\usepackage{tocloft} % TOC dots to page number
+\usepackage{fancyhdr} % Header and foother customization
+\usepackage[hidelinks=true]{hyperref} % Hides red boxes in TOC
+\usepackage{bookmark} % Bookmark on PDF
+\usepackage{url} % Link format in references
+\usepackage{listings}
+\usepackage{color}
+\usepackage{amsmath} % math equations
+\usepackage{setspace} % allow double space
+
+% ========================== end of LATEX Libraries ===========================
+
+% Setup
+\graphicspath {{img/}} % Setting relative path for images
+\renewcommand\cftsecleader{\cftdotfill{\cftdotsep}}
+
+% Page style setup. (fancyhdr, fancy)
+% l,c,r - left, center, right
+\lhead{}
+\rhead{}
+\renewcommand{\headrulewidth}{0pt}
+\rfoot{\version} % show version variable in the footer
+% TODO comment out for the final print
+
+% Colours
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+% Code Styles
+\lstdefinestyle{java}{
+%frame=tb,
+language=Java,
+aboveskip=2em,
+belowskip=2em,
+xleftmargin=2em,
+xrightmargin=2em,
+showstringspaces=false,
+columns=flexible,
+basicstyle={\small\ttfamily},
+numbers=none,
+numberstyle=\tiny\color{gray},
+keywordstyle=\color{blue},
+commentstyle=\color{dkgreen},
+stringstyle=\color{mauve},
+breaklines=true,
+breakatwhitespace=true,
+tabsize=4
+% http://stackoverflow.com/questions/3175105/writing-code-in-latex-document
+}
+
+\lstdefinestyle{xml}{
+language=XML,
+extendedchars=true,
+aboveskip=1em,
+belowskip=1em,
+xleftmargin=1em,
+xrightmargin=1em,
+%numbers=left,
+%numberstyle=\small\ttfamily\bf,
+%frame=single,
+breaklines=true,
+breakatwhitespace=true,
+breakindent=0pt,
+emph={},
+emphstyle=\color{red},
+basicstyle=\small\ttfamily,
+columns=fullflexible,
+showstringspaces=false,
+commentstyle=\color{gray}\upshape,
+morestring=[b]",
+morecomment=[s]{<?}{?>},
+morecomment=[s][\color{dkgreen}]{<!--}{-->},
+keywordstyle=\color{cyan},
+stringstyle=\color{black},
+tagstyle=\color{blue},
+morekeywords={xmlns,version,type}
+}
+
+\lstdefinestyle{php}{
+  basicstyle      = \small\ttfamily,
+  keywordstyle    = \color{dkblue},
+  stringstyle     = \color{red},
+  identifierstyle = \color{dkgreen},
+  commentstyle    = \color{gray},
+  emph            =[1]{php},
+  emphstyle       =[1]\color{black},
+  emph            =[2]{if,and,or,else},
+  emphstyle       =[2]\color{dkyellow}
+}
+% End of code styles
+
+
+
+
+
+% =============================================================================
+
+\begin{document}
+
+\pagestyle{fancy} % Page style. Header. Applies to all pages.
+
+\pagenumbering{roman} % Toc, List of tables, and figures
+\tocloftpagestyle{fancy} % page style fancy
+\tableofcontents
+\pagebreak
+
+% List of Figure
+\listoffigures
+% List of tables
+\listoftables
+\pagebreak
+
+\raggedright
+% Prematter
+\input{prematter/summary}
+\pagebreak
+\input{prematter/glossary}
+\pagebreak
+% Body
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\input{body/main}
+\pagebreak
+
+% Appendices
+\setcounter{page}{1} % reset counter
+\renewcommand{\thepage}{A-\arabic{page}} % page number format
+\begin{appendices}
+  \input{appendices/appendix-a}
+\end{appendices}
+
+\end{document}
